@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>추출수율 계산기 | 커피 교육 보물창고</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(135deg,#f4f7f8,#f8f8fb);color:#202b3b;font-family:Arial,"Noto Sans KR",sans-serif}
+.wrap{max-width:920px;margin:0 auto;padding:42px 20px 70px}.back{color:#687587;text-decoration:none;font-weight:700}
+h1{font-size:42px;margin:28px 0 10px;letter-spacing:-2px}.subtitle{color:#778294;font-size:17px;margin-bottom:28px}
+.card{background:#fff;border:1px solid #e8ebef;border-radius:28px;padding:30px;box-shadow:0 15px 35px rgba(50,65,85,.08)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}label{display:block;font-weight:800;margin-bottom:8px}
+input{width:100%;padding:15px 16px;border:1px solid #dce1e7;border-radius:14px;font-size:18px;outline:none}
+input:focus{border-color:#3d915c;box-shadow:0 0 0 3px rgba(61,145,92,.12)}.hint{color:#8993a1;font-size:13px;margin-top:7px}
+button{width:100%;margin-top:22px;padding:16px;border:0;border-radius:15px;background:#3d915c;color:#fff;font-size:18px;font-weight:800;cursor:pointer}
+.result{margin-top:26px;padding:26px;border-radius:22px;background:#f5f8f6;text-align:center}.result .label{color:#687587;font-weight:700}
+.ey{font-size:54px;font-weight:900;margin:8px 0}.formula{margin-top:22px;padding:18px;background:#f7f8fa;border-radius:16px;color:#536072;line-height:1.7}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.detail{background:#fff;border:1px solid #e8ebef;border-radius:15px;padding:14px}
+.detail small{display:block;color:#8993a1;margin-bottom:4px}.detail strong{font-size:18px}.note{margin-top:18px;color:#7a8492;font-size:13px;line-height:1.6}
+@media(max-width:650px){h1{font-size:34px}.grid,.details{grid-template-columns:1fr}.card{padding:20px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<a class="back" href="index.html">← 커피 교육 보물창고</a>
+<h1>📈 추출수율 계산기</h1>
+<p class="subtitle">TDS와 추출액 무게를 이용해 커피의 추출수율(EY)을 계산합니다.</p>
+<section class="card">
+<div class="grid">
+<div><label for="dose">원두 투입량 (g)</label><input id="dose" type="number" min="0" step="0.1" value="20"><div class="hint">추출에 사용한 커피 원두의 질량</div></div>
+<div><label for="beverage">추출액 무게 (g)</label><input id="beverage" type="number" min="0" step="0.1" value="300"><div class="hint">추출 후 컵에 나온 커피의 질량</div></div>
+<div><label for="tds">TDS (%)</label><input id="tds" type="number" min="0" step="0.01" value="1.35"><div class="hint">굴절계에서 측정한 TDS</div></div>
+</div>
+<button onclick="calculate()">추출수율 계산하기</button>
+<div class="result">
+<div class="label">추출수율 (Extraction Yield)</div>
+<div class="ey" id="ey">20.25%</div>
+<div class="details">
+<div class="detail"><small>용해된 커피 성분</small><strong id="dissolved">4.05 g</strong></div>
+<div class="detail"><small>커피 : 추출액 비율</small><strong id="ratio">1 : 15.0</strong></div>
+</div>
+</div>
+<div class="formula"><strong>계산식</strong><br>추출수율(%) = TDS(%) × 추출액 무게(g) ÷ 원두 투입량(g)</div>
+<p class="note">예시: TDS 1.35%, 추출액 300 g, 원두 20 g이라면 1.35 × 300 ÷ 20 = 20.25%입니다.</p>
+</section>
+</main>
+<script>
+function calculate(){
+const dose=Number(document.getElementById('dose').value);
+const beverage=Number(document.getElementById('beverage').value);
+const tds=Number(document.getElementById('tds').value);
+if(!dose||dose<=0||!beverage||beverage<=0||!tds||tds<=0){alert('세 값을 모두 0보다 큰 값으로 입력해주세요.');return;}
+const ey=(tds*beverage)/dose;
+const dissolved=(tds/100)*beverage;
+const ratio=beverage/dose;
+document.getElementById('ey').textContent=ey.toFixed(2)+'%';
+document.getElementById('dissolved').textContent=dissolved.toFixed(2)+' g';
+document.getElementById('ratio').textContent='1 : '+ratio.toFixed(1);
+}
+document.querySelectorAll('input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter')calculate();}));
+</script>
+</body>
+</html>
