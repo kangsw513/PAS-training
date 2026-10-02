@@ -6,7 +6,7 @@
 <title>PAS트레이닝</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  /* 유튜브 영상 16:9 반응형 비율 유지 */
+  /* 유튜브 비디오 16:9 비율 유지 */
   .video-container {
     position: relative;
     width: 100%;
@@ -25,7 +25,7 @@
     border: 0;
   }
 
-  /* 🎠 슬라이더 전체를 감싸는 바깥 박스 (화살표 버튼 정렬 공간) */
+  /* 화살표와 슬라이더를 묶는 컨테이너 */
   .slider-wrapper {
     position: relative;
     width: 100%;
@@ -33,15 +33,15 @@
     align-items: center;
   }
 
-  /* 둥근 화살표 버튼 스타일 */
+  /* 화살표 버튼 */
   .slide-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 45px;
-    height: 45px;
-    background: rgba(139, 69, 19, 0.85); /* 커피 브라운 컬러 */
-    color: white;
+    width: 44px;
+    height: 44px;
+    background: #8B4513;
+    color: #ffffff;
     border: none;
     border-radius: 50%;
     font-size: 20px;
@@ -51,15 +51,12 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 10;
+    z-index: 20;
     transition: background 0.2s, transform 0.2s;
   }
   .slide-btn:hover {
     background: #a0522d;
-    transform: translateY(-50%) scale(1.05);
-  }
-  .slide-btn:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: translateY(-50%) scale(1.08);
   }
   .slide-btn.prev {
     left: -15px;
@@ -68,7 +65,7 @@
     right: -15px;
   }
 
-  /* 가로로 부드럽게 넘겨볼 수 있는 카드 컨테이너 */
+  /* 가로 슬라이더 */
   .shorts-slider {
     width: 100%;
     display: flex !important;
@@ -76,17 +73,18 @@
     gap: 20px !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
-    scroll-behavior: smooth; /* 화살표 클릭 시 스무스하게 이동 */
+    scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding: 10px 5px 20px 5px !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .shorts-slider::-webkit-scrollbar {
+    display: none;
   }
 
-  /* 스크롤바 감추기 (화살표가 생겼으므로 화면을 더 깔끔하게 만들기 위해 숨김 처리) */
-  .shorts-slider::-webkit-scrollbar { display: none; }
-  .shorts-slider { -ms-overflow-style: none; scrollbar-width: none; }
-
-  /* PC 화면: 한 번에 정확히 3개씩 배치 */
+  /* PC 화면: 한 줄에 정확히 3개씩 배치 */
   .shorts-slider .tool-card {
     flex: 0 0 calc((100% - 40px) / 3) !important;
     min-width: calc((100% - 40px) / 3) !important;
@@ -94,7 +92,68 @@
     box-sizing: border-box;
   }
 
-  /* 태블릿 및 모바일 화면: 카드 크기 자동 최적화 */
-  @media (max-width: 900px) {
+  /* 모바일 화면: 한 줄에 1개씩 큼직하게 배치 */
+  @media (max-width: 768px) {
     .shorts-slider .tool-card {
-     
+      flex: 0 0 88% !important;
+      min-width: 88% !important;
+    }
+    .slide-btn.prev { left: -5px; }
+    .slide-btn.next { right: -5px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="container">
+
+<header class="hero">
+  <h1>PAS트레이닝</h1>
+  <p>필요한 교육 도구를 카테고리별로 선택해 사용하세요.</p>
+</header>
+
+<!-- =========================
+     SHORTS (슬라이더 영역)
+========================= -->
+<section class="category">
+<div class="category-head">
+<div class="category-title">
+<span class="category-icon">📱</span>
+<h2>SHORTS</h2>
+</div>
+<div class="category-actions">
+<span class="count">6개 영상</span>
+<button class="close-btn" onclick="toggleCategory(this)">닫기</button>
+</div>
+</div>
+
+<div class="slider-wrapper">
+  <!-- 왼쪽 화살표 버튼 -->
+  <button type="button" class="slide-btn prev" onclick="scrollSlider(-1)">&#10094;</button>
+
+  <div class="tools shorts-slider" id="shortsSlider">
+
+    <!-- 1번 영상 카드 -->
+    <div class="tool-card" style="cursor: default;">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/oj6sQfxRRwQ?si=awBY1ZezNllVvea3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <h3>추천 커피 교육 영상 1</h3>
+      <p>유튜브 채널에서 제공하는 유익한 커피 숏츠 교재입니다.</p>
+      <div class="card-line"></div>
+    </div>
+
+    <!-- 2번 영상 카드 -->
+    <div class="tool-card" style="cursor: default;">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/Qijhmagd7Z0?si=C_FHwp88yAkYLBVj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <h3>추천 커피 교육 영상 2</h3>
+      <p>우유 스티밍 및 에스프레소 추출 실전 노하우를 담은 영상입니다.</p>
+      <div class="card-line"></div>
+    </div>
+
+    <!-- 3번 영상 카드 -->
+    <div class="tool-card" style="cursor: default;">
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/WwzHD2MYFjk?si=fSxR8O_Knk_3GJxy" title="YouTube video player" frameborder="0" allow="accelerometer; autopla
