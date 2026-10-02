@@ -29,44 +29,44 @@
   .slider-wrapper {
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: center;
+    padding: 0 40px; /* 화살표 버튼 공간 확보 */
+    box-sizing: border-box;
   }
 
   /* 화살표 버튼 스타일 */
   .slide-btn {
     position: absolute;
-    top: 40%; /* 버튼 위치를 살짝 위로 조정 */
+    top: 40%;
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
-    background: rgba(139, 69, 19, 0.8); /* 반투명 커피색 */
+    background: rgba(139, 69, 19, 0.7);
     color: white;
     border: none;
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     z-index: 10;
     transition: all 0.3s;
   }
   .slide-btn:hover {
-    background: #8B4513; /* 호버 시 진하게 */
+    background: #8B4513;
   }
   .slide-btn:disabled {
     background: #ccc;
     cursor: default;
-    opacity: 0.5;
+    opacity: 0.4;
   }
   .slide-btn.prev {
-    left: -20px;
+    left: -10px;
   }
   .slide-btn.next {
-    right: -20px;
+    right: -10px;
   }
 
   /* 슬라이더 내부 컨테이너 */
@@ -81,7 +81,6 @@
     flex-wrap: nowrap !important;
     gap: 20px !important;
     transition: transform 0.5s ease-in-out;
-    padding: 10px 0;
   }
 
   /* PC: 가로로 3개씩 고정 */
@@ -92,11 +91,14 @@
 
   /* 모바일: 1개씩 꽉 차게 변경 */
   @media (max-width: 768px) {
+    .slider-wrapper {
+      padding: 0 30px; /* 모바일에서 화살표 공간 재조정 */
+    }
     .tools.slider-inner .tool-card {
       flex: 0 0 100% !important;
     }
-    .slide-btn.prev { left: -10px; }
-    .slide-btn.next { right: -10px; }
+    .slide-btn.prev { left: -15px; }
+    .slide-btn.next { right: -15px; }
   }
 </style>
 </head>
@@ -112,4 +114,35 @@
 <!-- =========================
      SHORTS (슬라이더 적용)
 ========================= -->
-<section cl
+<section class="category">
+<div class="category-head">
+<div class="category-title">
+<span class="category-icon">📱</span>
+<h2>SHORTS</h2>
+</div>
+<div class="category-actions">
+<span class="count">6개 영상</span>
+<button class="close-btn" onclick="toggleCategory(this)">닫기</button>
+</div>
+</div>
+
+<!-- 🎠 슬라이더 감싸는 영역 시작 -->
+<div class="slider-wrapper">
+  <!-- 왼쪽 화살표 -->
+  <button class="slide-btn prev" id="shorts-prev-btn" disabled>&#10094;</button>
+
+  <div class="slider-container">
+    <div class="tools slider-inner" id="shorts-slider">
+      <!-- 1번째 영상 카드 -->
+      <div class="tool-card" style="cursor: default;">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/oj6sQfxRRwQ?si=awBY1ZezNllVvea3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <h3>추천 커피 교육 영상 1</h3>
+        <p>유튜브 채널에서 제공하는 유익한 커피 숏츠 교재입니다.</p>
+        <div class="card-line"></div>
+      </div>
+      <!-- 2번째 영상 카드 -->
+      <div class="tool-card" style="cursor: default;">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/Qijhmagd7Z0?si=C_FHwp88yAkYLBVj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="s
