@@ -24,4 +24,58 @@
 <a class="tool-card" href="#"><div class="tool-icon">👃</div><h3>커핑 기록 도구</h3><p>향미와 바디, 산미 등의 관찰 내용을 기록합니다.</p><div class="card-line"></div></a>
 <a class="tool-card" href="#"><div class="tool-icon">💡</div><h3>커피 퀴즈</h3><p>교육 내용을 복습할 수 있는 간단한 퀴즈를 제공합니다.</p><div class="card-line"></div></a>
 </div></section>
-</main><script src="script.js"></script></body></html>
+</main><!-- 챗봇 UI 스타일 -->
+<style>
+  #coffee-chatbot { position: fixed; bottom: 20px; right: 20px; width: 350px; height: 450px; background: white; border: 1px solid #dcdcdc; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; flex-direction: column; font-family: sans-serif; z-index: 9999; }
+  #chat-header { background: #8B4513; color: white; padding: 12px; border-radius: 12px 12px 0 0; font-weight: bold; display: flex; align-items: center; justify-content: space-between; }
+  #chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 14px; line-height: 1.5; }
+  #chat-input-area { display: flex; border-top: 1px solid #eee; padding: 10px; }
+  #chat-input { flex: 1; border: 1px solid #ccc; border-radius: 4px; padding: 8px; outline: none; }
+  #chat-send { background: #8B4513; color: white; border: none; padding: 8px 12px; margin-left: 5px; border-radius: 4px; cursor: pointer; }
+</style>
+
+<!-- 챗봇 창 HTML -->
+<div id="coffee-chatbot">
+  <div id="chat-header">☕ 커피 보물상자 AI 챗봇</div>
+  <div id="chat-messages">
+    <div style="color: #666; margin-bottom: 10px;"><b>AI 강사:</b> 안녕하세요! 커피 추출, 스티밍 등 무엇이든 물어보세요!</div>
+  </div>
+  <div id="chat-input-area">
+    <input type="text" id="chat-input" placeholder="질문을 입력하세요...">
+    <button id="chat-send" onclick="askGemini()">전송</button>
+  </div>
+</div>
+
+<!-- Gemini API 연동 JavaScript -->
+<script>
+  const API_KEY = "여기에_발급받으신_Gemini_API_Key를_넣으세요";
+  
+  async function askGemini() {
+    const inputField = document.getElementById("chat-input");
+    const messageBox = document.getElementById("chat-messages");
+    const userText = inputField.value.trim();
+    
+    if (!userText) return;
+
+    messageBox.innerHTML += `<div style="margin-bottom: 10px; text-align: right;"><b>나:</b> ${userText}</div>`;
+    inputField.value = "";
+    messageBox.scrollTop = messageBox.scrollHeight;
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: `너는 바리스타 교육 강사 '진영'이야. 학생들에게 항상 친절하고 전문적으로 답변해줘. 학생 질문: ${userText}` }] }]
+        })
+      });
+      const data = await response.json();
+      const botReply = data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>');
+      
+      messageBox.innerHTML += `<div style="margin-bottom: 10px;"><b>AI 강사:</b> ${botReply}</div>`;
+    } catch (error) {
+      messageBox.innerHTML += `<div style="color: red; margin-bottom: 10px;">에러가 발생했습니다. API 키를 확인해 주세요.</div>`;
+    }
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+</script><script src="script.js"></script></body></html>
