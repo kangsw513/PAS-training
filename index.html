@@ -83,13 +83,8 @@
   }
 
   /* 스크롤바 감추기 (화살표가 생겼으므로 화면을 더 깔끔하게 만들기 위해 숨김 처리) */
-  .shorts-slider::-webkit-scrollbar {
-    display: none;
-  }
-  .shorts-slider {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+  .shorts-slider::-webkit-scrollbar { display: none; }
+  .shorts-slider { -ms-overflow-style: none; scrollbar-width: none; }
 
   /* PC 화면: 한 번에 정확히 3개씩 배치 */
   .shorts-slider .tool-card {
@@ -102,93 +97,4 @@
   /* 태블릿 및 모바일 화면: 카드 크기 자동 최적화 */
   @media (max-width: 900px) {
     .shorts-slider .tool-card {
-      flex: 0 0 calc((100% - 20px) / 2) !important;
-      min-width: calc((100% - 20px) / 2) !important;
-    }
-    /* 모바일에서는 손쉬운 사용을 위해 화면 바깥으로 버튼을 살짝 보냄 */
-    .slide-btn.prev { left: -5px; }
-    .slide-btn.next { right: -5px; }
-  }
-  @media (max-width: 600px) {
-    .shorts-slider .tool-card {
-      flex: 0 0 85% !important;
-      min-width: 85% !important;
-    }
-  }
-</style>
-</head>
-<body>
-
-<main class="container">
-
-<header class="hero">
-  <h1>PAS트레이닝</h1>
-  <p>필요한 교육 도구를 카테고리별로 선택해 사용하세요.</p>
-</header>
-
-<!-- =========================
-     SHORTS (화살표 슬라이더 적용)
-========================= -->
-<section class="category">
-<div class="category-head">
-<div class="category-title">
-<span class="category-icon">📱</span>
-<h2>SHORTS</h2>
-</div>
-<div class="category-actions">
-<span class="count">6개 영상</span>
-<button class="close-btn" onclick="toggleCategory(this)">닫기</button>
-</div>
-</div>
-
-<!-- 🎠 슬라이더 감싸는 영역 시작 -->
-<div class="slider-wrapper">
-  <!-- 왼쪽 화살표 -->
-  <button class="slide-btn prev" onclick="scrollSlider(-1)">&#10094;</button>
-
-  <div class="tools shorts-slider" id="shortsSlider">
-
-    <!-- 1번째 영상 카드 (oj6sQfxRRwQ) -->
-    <div class="tool-card" style="cursor: default;">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/oj6sQfxRRwQ?si=awBY1ZezNllVvea3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-      <h3>추천 커피 교육 영상 1</h3>
-      <p>유튜브 채널에서 제공하는 유익한 커피 숏츠 교재입니다.</p>
-      <div class="card-line"></div>
-    </div>
-
-    <!-- 2번째 영상 카드 (Qijhmagd7Z0) -->
-    <div class="tool-card" style="cursor: default;">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/Qijhmagd7Z0?si=C_FHwp88yAkYLBVj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-      <h3>추천 커피 교육 영상 2</h3>
-      <p>우유 스티밍 및 에스프레소 추출 실전 노하우를 담은 영상입니다.</p>
-      <div class="card-line"></div>
-    </div>
-
-    <!-- 3번째 영상 카드 (WwzHD2MYFjk) -->
-    <div class="tool-card" style="cursor: default;">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/WwzHD2MYFjk?si=fSxR8O_Knk_3GJxy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-      <h3>추천 커피 교육 영상 3</h3>
-      <p>우유 스티밍 및 에스프레소 추출 실전 노하우를 담은 영상입니다.</p>
-      <div class="card-line"></div>
-    </div>
-
-    <!-- 4번째 영상 카드 (gLyMb4WVycU) -->
-    <div class="tool-card" style="cursor: default;">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/gLyMb4WVycU?si=knmBniDLHPlMInEM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-      <h3>추천 커피 교육 영상 4</h3>
-      <p>우유 스티밍 및 에스프레소 추출 실전 노하우를 담은 영상입니다.</p>
-      <div class="card-line"></div>
-    </div>
-
-    <!-- 5번째 영상 카드 (SMTLkEGAGNA) -->
-    <div class="tool-card" style="cursor: default;">
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embe
+     
